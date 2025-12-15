@@ -113,7 +113,7 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchAPIData = async () => {
       try {
-        const eventRes = await axios.get( `${RENDER_API_URL}/api/events`);
+        const eventRes = await axios.get(`${RENDER_API_URL}/api/events`);
         setTotalEvents(eventRes.data.events_results?.length || 0);
 
         const [popular, topRated] = await Promise.all([
