@@ -3,6 +3,7 @@ import { db } from "../Firebase";
 import { ref, onValue, update, get } from "firebase/database";
 import axios from "axios";
 import "./Adminpannel.css";
+const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL;
 
 const AdminPanel = () => {
   const [totalEvents, setTotalEvents] = useState(0);
@@ -112,7 +113,7 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchAPIData = async () => {
       try {
-        const eventRes = await axios.get("https://eventify-local-event-ticket-booking.onrender.com//api/events");
+        const eventRes = await axios.get( `${RENDER_API_URL}/api/events`);
         setTotalEvents(eventRes.data.events_results?.length || 0);
 
         const [popular, topRated] = await Promise.all([

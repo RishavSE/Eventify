@@ -4,6 +4,8 @@ import "./Eventsgoogle.css";
 import BookingModal from "./BookingModal";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
+const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL;
+
 
 const GoogleEvents = () => {
   const [events, setEvents] = useState([]);
@@ -16,7 +18,7 @@ const GoogleEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://eventify-local-event-ticket-booking.onrender.com/api/events");
+        const response = await axios.get(`${RENDER_API_URL}/api/events`);
         const results = response.data.events_results;
         setEvents(Array.isArray(results) ? results : []);
       } catch (error) {
