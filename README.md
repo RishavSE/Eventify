@@ -141,6 +141,7 @@ Fork the repository<br>
 Create a feature branch<br>
 Commit your changes<br>
 Submit a pull request
-<h2 align="center">👨‍💻 Developer</h2> <p align="center"> <b>Rishav Kumar Singh</b><br> MERN Stack Developer<br> Full Stack Builder • System Thinker • Problem Solver </p>
+<h2 align="center">👨‍💻 Developer</h2> <p align="center"> <b>Rishav Kumar Singh</b><br> MERN Stack Developer<br> Full Stack Builder • System Thinker • Problem Solver 
+ </p> <p align="center"> 📫 Email: rishavse06@gmail.com </p>
 <h2 align="center">⭐ Final Thought</h2> <p align="center"> Eventify is built for users who want event booking to be<br><br> <b>fast • real-time • reliable</b> </p> <p align="center"> 🎟️ <b>Discover. Book. Experience.</b> </p>
 <h2 align="center">📜 License</h2> <p align="center"> This project is licensed under the <b>MIT License</b>
