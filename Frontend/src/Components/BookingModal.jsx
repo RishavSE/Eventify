@@ -37,7 +37,7 @@ const BookingModal = ({ event, onClose }) => {
   }, []);
 
   useEffect(() => {
-    const payingAdults = Math.max(formData.adults - formData.children, 0);
+    const payingAdults = formData.adults;
     setTotal(payingAdults * seatPrices[seatType]);
   }, [seatType, formData.adults, formData.children]);
 
