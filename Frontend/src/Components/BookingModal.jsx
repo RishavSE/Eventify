@@ -23,7 +23,7 @@ const BookingModal = ({ event, onClose }) => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const firebaseEventId = 'event1'; // global event ID
+  const firebaseEventId = 'event1'; 
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -81,7 +81,6 @@ const BookingModal = ({ event, onClose }) => {
         alert(`❌ Sorry, not enough ${formData.seatPreference} seats are available.`);
         return;
       }
-
       const ticketRef = ref(db, `tickets/${user.uid}`);
       const ticket = {
         eventTitle: event.title,
@@ -96,7 +95,7 @@ const BookingModal = ({ event, onClose }) => {
 
       await push(ticketRef, ticket);
 
-      // ✅ Reduce seat count by paying members
+      
       await update(seatRef, {
         ...seats,
         [preference]: seats[preference] - payingMembers,
