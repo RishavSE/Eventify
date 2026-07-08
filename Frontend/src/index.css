@@ -1,6 +1,20 @@
 @import "primereact/resources/themes/lara-light-indigo/theme.css";
 @import "primereact/resources/primereact.min.css";
 @import "primeicons/primeicons.css";
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    overflow-x:hidden;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
@@ -100,7 +114,7 @@ body {
   margin-left: 10px;
   cursor: pointer;
 }
-.search-btn :hover {
+.search-btn:hover {
   color: black;
 }
 
@@ -208,132 +222,74 @@ body {
   transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+  .navbar{
+    position: relative;
+    padding:15px 20px;
   }
 
-  .hamburger {
-    display: block;
-    z-index: 1001;
+  .hamburger{
+    display:block;
+    font-size:28px;
+    cursor:pointer;
+    z-index:1002;
   }
 
-  .nav-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  .nav-menu{
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
 
-    flex-direction: column;
-    align-items: center;
+  width:100%;
+  margin-left:0;  
+  flex:none;       
 
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
+  background:#fff;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+.navbar {
+  padding: 15px;
+}
+
+.logo {
+  flex: 1;
+}
+
+.hamburger {
+  flex-shrink: 0;
+}
+  .nav-menu.active{
+    max-height:700px;
+    padding:20px 0;
   }
 
-  .nav-menu.active {
-    max-height: 500px;
-    padding: 1rem 0;
+  .nav-links{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    padding:0;
+    margin:0;
   }
 
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .auth-section {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .auth-section button {
-    width: 90%;
-    max-width: 280px;
-  }
-
-  .welcome-text {
-    margin: 0;
-    text-align: center;
-  }
-
-  /* Hero */
-
-  .hero {
-    padding: 80px 16px;
-    height: auto;
-  }
-
-  .hero h1 {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .hero input {
-    width: 100%;
-    max-width: 320px;
-    margin-bottom: 1rem;
-  }
-
-  .search-btn {
-    width: 100%;
-    max-width: 320px;
-    margin-left: 0;
-  }
-
-  /* Categories */
-
-  .categories,
-  .popular-events {
-    padding: 2rem 1rem;
-  }
-
-  .category-grid {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .category-card {
-    width: 90px;
-    padding: 0.75rem 1rem;
-  }
-
-  /* Events */
-
-  .event-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .event-card {
-    width: 90%;
-    max-width: 320px;
-  }
-
-  .event-card img {
-    height: 140px;
-  }
-
-  .book-btn {
-    width: 100%;
+  .auth-section{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:20px;
+    gap:12px;
   }
 }
