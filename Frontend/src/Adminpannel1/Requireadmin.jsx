@@ -14,12 +14,11 @@ const RequireAdmin = ({ children }) => {
         return;
       }
 
-      // ✅ Check for specific admin email
       const adminEmail = "infosys@gmail.com";
       if (user.email === adminEmail) {
         setAllowed(true);
       } else {
-        navigate("/unauthorized"); // Redirect if not admin
+        navigate("/unauthorized");
       }
 
       setLoading(false);

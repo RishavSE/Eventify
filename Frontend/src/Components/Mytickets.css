@@ -18,7 +18,7 @@
   justify-content: flex-start;
   gap: 1.5rem;
   padding-left: 2rem;
-  align-items: stretch; /* ✅ ensures cards stretch equally in height */
+  align-items: stretch;
 }
 
 .ticket-card {
@@ -27,7 +27,7 @@
   border-radius: 12px;
   width: 100%;
   max-width: 350px;
-  flex: 1 1 350px; /* ✅ grow/shrink as needed, base size 350px */
+  flex: 1 1 350px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   text-align: left;
   transition: transform 0.2s ease-in-out;
@@ -62,8 +62,8 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
-  margin-top: auto; /* ✅ pushes button to bottom */
-  align-self: flex-start; /* optional: align button to left */
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 .pdf-btn:hover {

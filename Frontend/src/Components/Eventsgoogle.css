@@ -20,7 +20,6 @@ h2 {
   justify-content: center;
 }
 
-/* ✨ Stylish Event Card */
 .event-card {
   background: #ffffff;
   border-radius: 20px;
@@ -30,7 +29,9 @@ h2 {
   text-align: left;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid #eee;
 }
 
@@ -48,11 +49,9 @@ h2 {
   border-bottom: 1px solid #eee;
 }
 
-
 .event-card img:hover {
   transform: scale(1.03);
 }
-
 
 .event-info {
   padding: 1rem;
@@ -84,7 +83,6 @@ h2 {
   margin-top: auto;
 }
 
-/* 🎟️ Book Now Button - Stylish & Vibrant */
 .book-btn {
   background: linear-gradient(to right, #7f5af0, #a88ff7);
   color: white;
@@ -102,4 +100,3 @@ h2 {
   background: linear-gradient(to right, #5b3fc2, #8f6ef0);
   transform: scale(1.03);
 }
-

@@ -1,18 +1,16 @@
-/* Full-screen blurred overlay background */
 .changepass-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(6px); /* 👈 This enables blur */
-  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent dark */
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
-
 
 .changepass-box {
   background: white;
@@ -24,7 +22,6 @@
   z-index: 1000;
 }
 
-/* Title */
 .changepass-title {
   text-align: center;
   color: #7b2ff7;
@@ -32,7 +29,6 @@
   margin-bottom: 18px;
 }
 
-/* Form */
 .changepass-form {
   display: flex;
   flex-direction: column;
@@ -59,7 +55,6 @@
   border: 1.5px solid #7f5af0;
 }
 
-
 .changepass-btn {
   background: linear-gradient(90deg, #7f5af0, #d946ef);
   color: #fff;
@@ -75,7 +70,6 @@
 .changepass-btn:hover {
   background: linear-gradient(90deg, #6a4cff, #c026d3);
 }
-
 
 .cancel-btn {
   background: #ef4444;

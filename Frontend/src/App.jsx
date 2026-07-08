@@ -50,9 +50,7 @@ function AdminHeader({ onLogout }) {
           <div style={{ fontWeight: "bold", color: "black" }}>
             {user.displayName || "Admin"}
           </div>
-          <div style={{ fontSize: "0.85rem", color: "black" }}>
-            Role: Admin
-          </div>
+          <div style={{ fontSize: "0.85rem", color: "black" }}>Role: Admin</div>
         </div>
         <button
           style={{
@@ -105,7 +103,7 @@ function AppContent() {
           JSON.stringify({
             displayName: user.displayName || "User",
             email,
-          })
+          }),
         );
         setRole(userRole);
       } else {
@@ -150,7 +148,7 @@ function AppContent() {
             <>
               <Hero />
               <PopularEvents />
-              <Footerr />
+              
             </>
           }
         />
@@ -161,10 +159,8 @@ function AppContent() {
         <Route path="/events" element={<GoogleEvents />} />
         <Route path="/movies" element={<TMDBMovies />} />
 
-        {/* ✅ My Tickets - accessible by everyone */}
         <Route path="/my-tickets" element={<MyTickets />} />
 
-        {/* ✅ Capitalized redirect fallback */}
         <Route path="/MyTickets" element={<Navigate to="/my-tickets" />} />
 
         <Route
@@ -185,11 +181,11 @@ function AppContent() {
           }
         />
       </Routes>
+      <Footerr />
     </>
   );
 }
 
-// ✅ Main App Wrapper
 function App() {
   return (
     <Router>

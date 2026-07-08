@@ -27,8 +27,6 @@ const AdminPanel = () => {
 
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-
-  // ✅ Auto-reset seats at 12AM if needed
   useEffect(() => {
     const eventsRef = ref(db, "events");
 
@@ -52,7 +50,6 @@ const AdminPanel = () => {
     });
   }, []);
 
-  // ✅ Export user data to CSV
   const exportToCSV = (data, filename) => {
     const csvHeader = ["S.NO.", "Name", "Email", "Tickets Booked"];
     const csvRows = data.map((user, index) => [
@@ -76,7 +73,6 @@ const AdminPanel = () => {
     document.body.removeChild(link);
   };
 
-  // ✅ Load Users and Tickets Stats
   useEffect(() => {
     const ticketsRef = ref(db, "tickets");
     const usersRef = ref(db, "users");
@@ -102,14 +98,11 @@ const AdminPanel = () => {
 
         setUserStats(updatedList);
         setTotalUsers(userList.length);
-        setTotalTickets(
-          updatedList.reduce((sum, u) => sum + u.ticketCount, 0)
-        );
+        setTotalTickets(updatedList.reduce((sum, u) => sum + u.ticketCount, 0));
       });
     });
   }, []);
 
-  // ✅ Load Movies and Events
   useEffect(() => {
     const fetchAPIData = async () => {
       try {
@@ -137,7 +130,6 @@ const AdminPanel = () => {
     fetchAPIData();
   }, []);
 
-  // ✅ Handle Global Seat Update
   const handleSeatUpdateForAll = async () => {
     if (!front || !middle || !back) {
       alert("Please enter all seat values.");
@@ -171,7 +163,7 @@ const AdminPanel = () => {
         });
       });
 
-      alert("✅ All events updated!");
+      alert(" All events updated!");
       setFront("");
       setMiddle("");
       setBack("");
@@ -181,7 +173,6 @@ const AdminPanel = () => {
     }
   };
 
-  // ✅ Calculate Seat Totals and Availability
   useEffect(() => {
     const eventsRef = ref(db, "events");
     onValue(eventsRef, (snapshot) => {
@@ -225,14 +216,25 @@ const AdminPanel = () => {
         <h2>👑 Admin Dashboard</h2>
 
         <div className="stats-grid">
-          <div className="stat-card"><h3>👥Registered Users</h3><p>{totalUsers}</p></div>
-          <div className="stat-card"><h3>📅Total Events</h3><p>{totalEvents}</p></div>
-          <div className="stat-card"><h3>🎬Total Movies</h3><p>{totalMovies}</p></div>
-          <div className="stat-card"><h3>🎫Booked Tickets</h3><p>{totalTickets}</p></div>
+          <div className="stat-card">
+            <h3>👥Registered Users</h3>
+            <p>{totalUsers}</p>
+          </div>
+          <div className="stat-card">
+            <h3>📅Total Events</h3>
+            <p>{totalEvents}</p>
+          </div>
+          <div className="stat-card">
+            <h3>🎬Total Movies</h3>
+            <p>{totalMovies}</p>
+          </div>
+          <div className="stat-card">
+            <h3>🎫Booked Tickets</h3>
+            <p>{totalTickets}</p>
+          </div>
         </div>
       </div>
 
-      {/* ✅ Combined Seat Summary */}
       <div className="dashboard-section">
         <h3 style={{ color: "#fff", marginTop: "2rem", textAlign: "center" }}>
           🪑 Seats Summary
@@ -240,39 +242,63 @@ const AdminPanel = () => {
         <div className="stats-grid">
           <div className="stat-card">
             <h3>Front</h3>
-            <p>{seatStats.availableFront} / {seatStats.totalFront} available</p>
+            <p>
+              {seatStats.availableFront} / {seatStats.totalFront} available
+            </p>
           </div>
           <div className="stat-card">
             <h3>Middle</h3>
-            <p>{seatStats.availableMiddle} / {seatStats.totalMiddle} available</p>
+            <p>
+              {seatStats.availableMiddle} / {seatStats.totalMiddle} available
+            </p>
           </div>
           <div className="stat-card">
             <h3>Back</h3>
-            <p>{seatStats.availableBack} / {seatStats.totalBack} available</p>
+            <p>
+              {seatStats.availableBack} / {seatStats.totalBack} available
+            </p>
           </div>
         </div>
       </div>
 
-      {/* ✅ Global Seat Update */}
       <div className="seat-manager-section">
         <h3 style={{ color: "#fff", textAlign: "center", marginTop: "2rem" }}>
           🎯 Set Global Seats for All Events
         </h3>
 
         <div className="seat-inputs">
-          <input type="number" placeholder="Front" value={front} onChange={(e) => setFront(e.target.value)} />
-          <input type="number" placeholder="Middle" value={middle} onChange={(e) => setMiddle(e.target.value)} />
-          <input type="number" placeholder="Back" value={back} onChange={(e) => setBack(e.target.value)} />
+          <input
+            type="number"
+            placeholder="Front"
+            value={front}
+            onChange={(e) => setFront(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Middle"
+            value={middle}
+            onChange={(e) => setMiddle(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Back"
+            value={back}
+            onChange={(e) => setBack(e.target.value)}
+          />
           <button onClick={handleSeatUpdateForAll}>✅ Apply</button>
         </div>
       </div>
 
-      {/* ✅ Users Table */}
       <div className="user-table-section">
-        <h3 style={{ marginTop: "2rem", textAlign: "center" }}>📋 Users Data</h3>
+        <h3 style={{ marginTop: "2rem", textAlign: "center" }}>
+          📋 Users Data
+        </h3>
 
         <div className="csv-export-bottom-wrapper">
-          <button onClick={() => exportToCSV(userStats, "users_data.csv")} className="csv-export-btn">
+          <button
+            onClick={() => exportToCSV(userStats, "users_data.csv")}
+            className="csv-export-btn"
+          >
             📥 Export Users as CSV
           </button>
         </div>
@@ -280,7 +306,12 @@ const AdminPanel = () => {
         <div className="table-wrapper">
           <table className="user-table">
             <thead>
-              <tr><th>S.NO.</th><th>Name</th><th>Email</th><th>🎟️ Tickets Booked</th></tr>
+              <tr>
+                <th>S.NO.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>🎟️ Tickets Booked</th>
+              </tr>
             </thead>
             <tbody>
               {userStats.map((user, index) => (

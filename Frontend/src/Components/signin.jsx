@@ -23,11 +23,14 @@ const SignIn = ({ onLogin }) => {
 
   const ADMIN_EMAIL = "infosys@gmail.com";
 
-  // 🔐 Email & Password Login
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
       const user = userCredential.user;
 
       const isAdmin = user.email === ADMIN_EMAIL;
@@ -38,21 +41,18 @@ const SignIn = ({ onLogin }) => {
 
       if (onLogin) onLogin();
       navigate(isAdmin ? "/admin" : "/my-tickets");
-
     } catch (error) {
       console.error("Login error:", error.message);
       alert("Invalid email or password");
     }
   };
 
-  // 🔐 Google Sign-In + Save to DB + Redirect
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Save user to Realtime DB
       await set(ref(db, `users/${user.uid}`), {
         name: user.displayName || "Google User",
         email: user.email,
@@ -66,14 +66,12 @@ const SignIn = ({ onLogin }) => {
 
       if (onLogin) onLogin();
       navigate(isAdmin ? "/admin" : "/my-tickets");
-
     } catch (error) {
       console.error("Google login error:", error.message);
       alert("Google sign-in failed");
     }
   };
 
-  // 🔄 Reset Modal Logic
   const resetModalFields = () => {
     setResetEmail("");
     setNewPassword("");
@@ -144,7 +142,6 @@ const SignIn = ({ onLogin }) => {
         </button>
       </div>
 
-      {/* 🔄 Password Reset Modal */}
       {showResetModal && (
         <div
           className="changepass-container"

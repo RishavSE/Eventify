@@ -88,7 +88,7 @@
 .btn-primary:hover {
    background-color: #5b3fc2;
 }
-/* Responsiveness */
+
 @media (max-width: 900px) {
   .about-hero {
     padding: 2.5rem 1rem;

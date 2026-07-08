@@ -1,58 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from 'primereact/button';
-import { useNavigate, Link } from 'react-router-dom';
-import { auth } from '../Firebase';
-import { signOut } from 'firebase/auth';
+import React, { useEffect, useState } from "react";
+import { Button } from "primereact/button";
+import { useNavigate, Link } from "react-router-dom";
+import { auth } from "../Firebase";
+import { signOut } from "firebase/auth";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const navigate = useNavigate();
+
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
-      const storedRole = localStorage.getItem("role");
-      setRole(storedRole || '');
+      setRole(localStorage.getItem("role") || "");
     });
 
     return () => unsubscribe();
   }, []);
 
   const handleSignIn = () => {
+    setMenuOpen(false);
     navigate("/signin");
   };
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      setMenuOpen(false);
       setUser(null);
-      localStorage.clear();           // ✅ Fully clear login state
-      sessionStorage.clear();         // ✅ Clear sessionStorage too
-
+      localStorage.clear();
+      sessionStorage.clear();
       navigate("/");
-      window.location.reload();       // ✅ Reload to refresh UI (important for admin views)
+      window.location.reload();
     } catch (error) {
-      console.error("Logout failed:", error.message);
+      console.log(error);
     }
   };
 
   const getDisplayName = () => {
-    if (!user) return '';
-    if (user.displayName) return user.displayName.split(' ')[0];
-    return user.email;
+    if (!user) return "";
+    return user.displayName ? user.displayName.split(" ")[0] : user.email;
   };
 
   return (
     <nav className="navbar">
-      <div className="logo">🎟️ <b>Eventify</b></div>
+      <div className="logo">
+        🎟️ <b>Eventify</b>
+      </div>
 
-      {/* Show different navbar for admin */}
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+      </div>
+
       {role === "admin" ? (
         <div className="admin-navbar">
-          <span style={{ color: "#fff", marginRight: "1rem" }}>
-            Admin: {getDisplayName()}
-          </span>
+          <span>Admin: {getDisplayName()}</span>
+
           <Button
             label="Logout"
             className="p-button-sm p-button-danger"
@@ -60,23 +66,44 @@ export default function Navbar() {
           />
         </div>
       ) : (
-        <>
+        <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
           <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/events">Events</Link></li>
-            <li><Link to="/movies">Movies</Link></li>
-            <li><Link to="/my-tickets">My Tickets</Link></li>
+            <li>
+              <Link to="/" onClick={() => setMenuOpen(false)}>
+                Home
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/events" onClick={() => setMenuOpen(false)}>
+                Events
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/movies" onClick={() => setMenuOpen(false)}>
+                Movies
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/my-tickets" onClick={() => setMenuOpen(false)}>
+                My Tickets
+              </Link>
+            </li>
           </ul>
 
           <div className="auth-section">
             {user ? (
               <>
-                <span className="welcome-text">Welcome, {getDisplayName()}</span>
+                <span className="welcome-text">
+                  Welcome, {getDisplayName()}
+                </span>
+
                 <Button
                   label="Logout"
                   className="p-button-sm p-button-danger"
                   onClick={handleLogout}
-                  style={{ marginLeft: '0.5rem' }}
                 />
               </>
             ) : (
@@ -87,7 +114,7 @@ export default function Navbar() {
               />
             )}
           </div>
-        </>
+        </div>
       )}
     </nav>
   );

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import './Bookingmodel.css';
-import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../Firebase';
-import { ref, push, get, update } from 'firebase/database';
+import React, { useState, useEffect } from "react";
+import "./Bookingmodel.css";
+import { useNavigate } from "react-router-dom";
+import { auth, db } from "../Firebase";
+import { ref, push, get, update } from "firebase/database";
 
 const seatPrices = {
   Regular: 500,
@@ -10,28 +10,28 @@ const seatPrices = {
 };
 
 const BookingModal = ({ event, onClose }) => {
-  const [seatType, setSeatType] = useState('Regular');
+  const [seatType, setSeatType] = useState("Regular");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     adults: 1,
     children: 0,
-    seatPreference: 'Middle',
+    seatPreference: "Middle",
   });
   const [total, setTotal] = useState(0);
   const [seatAvailability, setSeatAvailability] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const firebaseEventId = 'event1'; 
+  const firebaseEventId = "event1";
 
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
       setFormData((prev) => ({
         ...prev,
-        email: user.email || '',
-        name: user.displayName || '',
+        email: user.email || "",
+        name: user.displayName || "",
       }));
     }
   }, []);
@@ -61,14 +61,14 @@ const BookingModal = ({ event, onClose }) => {
     e.preventDefault();
     const user = auth.currentUser;
     if (!user) {
-      sessionStorage.setItem('pendingBooking', JSON.stringify(formData));
-      alert('Please sign in to continue your booking.');
+      sessionStorage.setItem("pendingBooking", JSON.stringify(formData));
+      alert("Please sign in to continue your booking.");
       onClose();
-      navigate('/signin');
+      navigate("/signin");
       return;
     }
 
-    const preference = formData.seatPreference.toLowerCase(); // front, middle, back
+    const preference = formData.seatPreference.toLowerCase();
     const seatRef = ref(db, `events/${firebaseEventId}/seats`);
 
     try {
@@ -78,13 +78,15 @@ const BookingModal = ({ event, onClose }) => {
       const payingMembers = Math.max(formData.adults - formData.children, 0);
 
       if (!seats || seats[preference] < payingMembers) {
-        alert(`❌ Sorry, not enough ${formData.seatPreference} seats are available.`);
+        alert(
+          `❌ Sorry, not enough ${formData.seatPreference} seats are available.`,
+        );
         return;
       }
       const ticketRef = ref(db, `tickets/${user.uid}`);
       const ticket = {
         eventTitle: event.title,
-        location: event.address || 'Online',
+        location: event.address || "Online",
         ...formData,
         seatType,
         total,
@@ -95,7 +97,6 @@ const BookingModal = ({ event, onClose }) => {
 
       await push(ticketRef, ticket);
 
-      
       await update(seatRef, {
         ...seats,
         [preference]: seats[preference] - payingMembers,
@@ -103,10 +104,10 @@ const BookingModal = ({ event, onClose }) => {
 
       alert(`✅ Booking Confirmed for ${formData.name}!`);
       onClose();
-      navigate('/my-tickets');
+      navigate("/my-tickets");
     } catch (error) {
-      console.error('❌ Booking error:', error);
-      alert('Booking failed. Please try again.');
+      console.error("❌ Booking error:", error);
+      alert("Booking failed. Please try again.");
     }
   };
 
@@ -116,8 +117,12 @@ const BookingModal = ({ event, onClose }) => {
     <div className="modal-overlay">
       <div className="modal booking-modal">
         <h2>🎟️ Book Your Ticket</h2>
-        <p><strong>Event:</strong> {event.title}</p>
-        <p><strong>Location:</strong> {event.address || 'Online'}</p>
+        <p>
+          <strong>Event:</strong> {event.title}
+        </p>
+        <p>
+          <strong>Location:</strong> {event.address || "Online"}
+        </p>
 
         {loading ? (
           <p>🔄 Loading seat availability...</p>
@@ -144,13 +149,20 @@ const BookingModal = ({ event, onClose }) => {
             />
 
             <label>Seat Type</label>
-            <select value={seatType} onChange={(e) => setSeatType(e.target.value)}>
+            <select
+              value={seatType}
+              onChange={(e) => setSeatType(e.target.value)}
+            >
               <option value="Regular">Regular - ₹500</option>
               <option value="VIP">VIP - ₹1200</option>
             </select>
 
             <label>Seat Preference</label>
-            <select name="seatPreference" value={formData.seatPreference} onChange={handleChange}>
+            <select
+              name="seatPreference"
+              value={formData.seatPreference}
+              onChange={handleChange}
+            >
               <option value="Front" disabled={seatAvailability?.front <= 0}>
                 Front ({seatAvailability?.front || 0} left)
               </option>
@@ -182,16 +194,27 @@ const BookingModal = ({ event, onClose }) => {
             />
 
             <div className="summary">
-              <p><strong>💺 Seat Price:</strong> ₹{seatPrices[seatType]}</p>
-              <p><strong>👨‍👩‍👧 Paying Members:</strong> {Math.max(formData.adults - formData.children, 0)}</p>
-              <p className="total-amount"><strong>Total Payable:</strong> ₹{total}</p>
+              <p>
+                <strong>💺 Seat Price:</strong> ₹{seatPrices[seatType]}
+              </p>
+              <p>
+                <strong>👨‍👩‍👧 Paying Members:</strong>{" "}
+                {Math.max(formData.adults - formData.children, 0)}
+              </p>
+              <p className="total-amount">
+                <strong>Total Payable:</strong> ₹{total}
+              </p>
             </div>
 
-            <button type="submit" className="book-btn">✅ Confirm & Pay</button>
+            <button type="submit" className="book-btn">
+              ✅ Confirm & Pay
+            </button>
           </form>
         )}
 
-        <button className="close-btn" onClick={onClose}>❌ Close</button>
+        <button className="close-btn" onClick={onClose}>
+          ❌ Close
+        </button>
       </div>
     </div>
   );

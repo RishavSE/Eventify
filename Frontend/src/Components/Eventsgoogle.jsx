@@ -6,7 +6,6 @@ import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL;
 
-
 const GoogleEvents = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,23 +32,23 @@ const GoogleEvents = () => {
   }, []);
 
   const handleBookNow = (eventData) => {
-   const user = auth.currentUser;
- 
-   if (!user) {
-     const confirmRedirect = window.confirm("You need to sign in to book this event. Do you want to sign in now?");
-     if (confirmRedirect) {
-      //  sessionStorage.setItem("pendingEvent", JSON.stringify(eventData)); // Save booking intent
-       navigate("/signin");
-     }
-     // If user cancels, do nothing — stay on same page
-     return;
-   }
- 
-   setSelectedEvent(eventData);
-   setShowModal(true);
- };
+    const user = auth.currentUser;
 
-  // Auto-open modal after login if event was pending
+    if (!user) {
+      const confirmRedirect = window.confirm(
+        "You need to sign in to book this event. Do you want to sign in now?",
+      );
+      if (confirmRedirect) {
+        navigate("/signin");
+      }
+
+      return;
+    }
+
+    setSelectedEvent(eventData);
+    setShowModal(true);
+  };
+
   useEffect(() => {
     const user = auth.currentUser;
     const saved = sessionStorage.getItem("pendingEvent");
@@ -79,7 +78,7 @@ const GoogleEvents = () => {
                     event.image && event.image.includes("http")
                       ? event.image
                       : `https://source.unsplash.com/1600x900/?${encodeURIComponent(
-                          event.title
+                          event.title,
                         )},event`
                   }
                   alt={event.title}
@@ -95,7 +94,9 @@ const GoogleEvents = () => {
                       "/pic7.jpg",
                       "/pic8.jpg",
                     ];
-                    const randomIndex = Math.floor(Math.random() * fallbackImages.length);
+                    const randomIndex = Math.floor(
+                      Math.random() * fallbackImages.length,
+                    );
                     e.currentTarget.src = fallbackImages[randomIndex];
                   }}
                 />
@@ -108,7 +109,10 @@ const GoogleEvents = () => {
                 <p>
                   <strong>Location:</strong> {event.address || "Online"}
                 </p>
-                <button className="book-btn" onClick={() => handleBookNow(event)}>
+                <button
+                  className="book-btn"
+                  onClick={() => handleBookNow(event)}
+                >
                   Book Now
                 </button>
               </div>
@@ -118,7 +122,10 @@ const GoogleEvents = () => {
       )}
 
       {showModal && selectedEvent && (
-        <BookingModal event={selectedEvent} onClose={() => setShowModal(false)} />
+        <BookingModal
+          event={selectedEvent}
+          onClose={() => setShowModal(false)}
+        />
       )}
     </div>
   );

@@ -7,7 +7,6 @@
   padding: 20px;
 }
 
-/* Card box */
 .signin-box {
   background: white;
   box-shadow: #444;
@@ -18,16 +17,14 @@
   width: 100%;
 }
 
-/* Title */
 .signin-title {
   text-align: center;
   color: #7b2ff7;
   font-size: 28px;
   margin-bottom: 24px;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Form styling */
 .signin-form {
   display: flex;
   flex-direction: column;
@@ -53,7 +50,6 @@
   border-color: #7b2ff7;
 }
 
-/* Links row */
 .signin-links {
   display: flex;
   justify-content: space-between;
@@ -69,7 +65,6 @@
   text-decoration: underline;
 }
 
-/* Button */
 .signin-form button {
   background: linear-gradient(90deg, #7f5af0, #d946ef);
   color: #fff;
@@ -86,7 +81,7 @@
   background: linear-gradient(90deg, #6a4cff, #c026d3);
 }
 
-.continue h6{
+.continue h6 {
   text-align: center;
 }
 
@@ -111,18 +106,18 @@
 
 .google-icon {
   font-size: 20px;
-  color: #db4437; /* Google's red color */
+  color: #db4437;
 }
 .google-login-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;  /* centers the button inside its parent */
+  margin: 0 auto;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 50%;
   padding: 0.5rem;
-  font-size: 2rem; /* make the icon bigger */
+  font-size: 2rem;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -130,5 +125,3 @@
 .google-login-icon:hover {
   transform: scale(1.1);
 }
-
-

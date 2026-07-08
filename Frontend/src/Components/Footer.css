@@ -87,21 +87,20 @@
   font-size: 0.9rem;
 }
 .footer-brand {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-weight: bolder;
   color: white;
   font-size: 1.3rem;
-  /* margin-bottom: 0.3rem; */
 }
 hr {
   border: none;
   border-top: 1px solid #333;
   margin-bottom: 2rem;
 }
- /* Responsive  */
- @media (max-width: 900px) {
+
+@media (max-width: 900px) {
   .footer-columns {
- flex-direction: column;
+    flex-direction: column;
     align-items: center;
     gap: 0;
   }

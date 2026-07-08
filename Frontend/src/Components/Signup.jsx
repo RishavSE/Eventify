@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../Firebase";
 import { ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
@@ -24,20 +21,21 @@ const SignUp = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
 
       await updateProfile(userCredential.user, { displayName: name });
 
-      // ✅ Save to Realtime Database
       const userId = userCredential.user.uid;
       await set(ref(db, `users/${userId}`), { name, email });
 
-      // ✅ Set login info in localStorage
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("role", "user");
       localStorage.setItem("userInfo", JSON.stringify({ name, email }));
 
-      // ✅ Slight delay to ensure auth state updates before redirect
       setTimeout(() => {
         navigate("/my-tickets");
       }, 500);
@@ -50,7 +48,9 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <div className="signup-box">
-        <h2 className="signup-title">🎟️ <b>Eventify</b></h2>
+        <h2 className="signup-title">
+          🎟️ <b>Eventify</b>
+        </h2>
         <form onSubmit={handleSubmit} className="signup-form">
           <label>Name</label>
           <input
@@ -90,7 +90,9 @@ const SignUp = () => {
             <a href="/signin">Already have an account?</a>
           </div>
 
-          <button type="submit" className="signup-btn">Sign Up</button>
+          <button type="submit" className="signup-btn">
+            Sign Up
+          </button>
         </form>
       </div>
     </div>
