@@ -199,7 +199,7 @@ const BookingModal = ({ event, onClose }) => {
               </p>
               <p>
                 <strong>👨‍👩‍👧 Paying Members:</strong>{" "}
-                {Math.max(formData.adults - formData.children, 0)}
+                {formData.adults}
               </p>
               <p className="total-amount">
                 <strong>Total Payable:</strong> ₹{total}
