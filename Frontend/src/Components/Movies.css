@@ -29,7 +29,7 @@
 .movie-card img {
   width: 100%;
   height: 300px;
-  object-fit: contain !important;
+  object-fit: inherit !important;
 }
 
 .movie-info {
