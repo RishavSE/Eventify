@@ -63,7 +63,7 @@ const GoogleEvents = () => {
 
   return (
     <div className="google-events">
-      <h2>🎉 Events in Chandigarh, Delhi & Amritsar</h2>
+      <h2>🎉 Events </h2>
       {loading ? (
         <p>Loading events...</p>
       ) : events.length === 0 ? (
