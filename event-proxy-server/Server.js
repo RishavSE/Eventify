@@ -6,7 +6,7 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 
-const cities = ["Chandigarh", "Delhi", "Amritsar","Lucknow","Uttrakhand","Jharkhand","Varanasi"];
+const cities = ["Chandigarh", "Delhi", "Amritsar","Lucknow","Noida","Mumbai","Varanasi","Pune"];
 
 app.get("/api/events", async (req, res) => {
   try {
