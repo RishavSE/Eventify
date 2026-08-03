@@ -43,7 +43,7 @@ h2 {
 .event-image {
   width: 100%;
   height: 220px;
-  object-fit: cover;
+  object-fit: inherit;
   object-position: center;
   background-color: #ccc;
   border-bottom: 1px solid #eee;
