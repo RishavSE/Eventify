@@ -127,7 +127,6 @@ npm run dev
 <h2 align="center">🔮 Future Enhancements</h2>
 
 • Online payment integration (Stripe/Razorpay)
-• Advanced filtering (categories/tags)
 • Push notifications (Firebase Messaging)
 • Enhanced booking analytics
 
