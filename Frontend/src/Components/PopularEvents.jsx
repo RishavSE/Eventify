@@ -16,12 +16,14 @@ import EventCard from "./EventCard";
 import BookingModal from "./BookingModal";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
+import { useSearch } from "../Content/search";
 import pic from "/pic6.jpg";
 
 function PopularEvents() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { registerSearchData } = useSearch();
 
   const events = [
     {
@@ -130,6 +132,18 @@ function PopularEvents() {
       price: 699,
     },
   ];
+  useEffect(() => {
+    registerSearchData(
+      "popular",
+      events.map((event) => ({
+        title: event.title,
+        subtitle: event.location,
+        image: event.image,
+        type: "Popular Event",
+        path: "/",
+      })),
+    );
+  }, []);
 
   const handleBookNow = (eventData) => {
     const user = auth.currentUser;

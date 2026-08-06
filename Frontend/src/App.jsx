@@ -18,14 +18,14 @@ import MyTickets from "./Components/Mytickets";
 import AboutUs from "./Components/Aboutus";
 import TMDBMovies from "./Components/Movies";
 import Signup from "./Components/Signup";
-
+import { SearchProvider } from "./Content/search";
 import AdminPanel from "./Adminpannel1/Adminpannel";
 import RequireAdmin from "./Adminpannel1/Requireadmin";
 
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../src/Firebase";
 
-// ✅ Admin Header UI
+
 function AdminHeader({ onLogout }) {
   const user = JSON.parse(localStorage.getItem("userInfo")) || {};
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ function AdminHeader({ onLogout }) {
   );
 }
 
-// ✅ Main App Content
+
 function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -189,7 +189,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <SearchProvider>
+        <AppContent />
+      </SearchProvider>
     </Router>
   );
 }

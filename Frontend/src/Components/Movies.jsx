@@ -4,7 +4,7 @@ import "./Eventsgoogle.css";
 import BookingModal from "./BookingModal";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
-
+import { useSearch } from "../Content/search";
 
 const TMDBMovies = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -12,6 +12,7 @@ const TMDBMovies = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { registerSearchData } = useSearch();
 
   const locations = [
     "PVR VR Punjab",
@@ -49,6 +50,23 @@ const TMDBMovies = () => {
         ]);
         setPopularMovies(popularRes.data.results);
         setTopRatedMovies(topRatedRes.data.results);
+        const allMovies = [
+          ...popularRes.data.results,
+          ...topRatedRes.data.results,
+        ];
+
+        registerSearchData(
+          "movies",
+          allMovies.map((movie) => ({
+            title: movie.title,
+            subtitle: movie.release_date,
+            image: movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : "/concert.webp",
+            type: "Movie",
+            path: "/movies",
+          })),
+        );
       } catch (error) {
         console.error("Failed to fetch movies:", error);
       }

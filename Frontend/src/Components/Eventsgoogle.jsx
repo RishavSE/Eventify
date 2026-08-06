@@ -4,6 +4,7 @@ import "./Eventsgoogle.css";
 import BookingModal from "./BookingModal";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from "../Content/search";
 const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL;
 
 const GoogleEvents = () => {
@@ -13,13 +14,31 @@ const GoogleEvents = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const navigate = useNavigate();
+  const { registerSearchData } = useSearch();
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(`${RENDER_API_URL}/api/events`);
-        const results = response.data.events_results;
-        setEvents(Array.isArray(results) ? results : []);
+        const results = Array.isArray(response.data.events_results)
+          ? response.data.events_results
+          : [];
+
+        setEvents(results);
+
+        registerSearchData(
+          "googleEvents",
+          results.map((event) => ({
+            title: event.title,
+            subtitle: event.address || "Online",
+            image:
+              event.image && event.image.includes("http")
+                ? event.image
+                : "/pic1.jpg",
+            type: "Event",
+            path: "/events",
+          })),
+        );
       } catch (error) {
         console.error("Error fetching events:", error);
         setEvents([]);
