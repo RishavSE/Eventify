@@ -5,7 +5,6 @@ import BookingModal from "./BookingModal";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 
-console.log("TMDB KEY = ", import.meta.env.VITE_TMDB_API_KEY);
 
 const TMDBMovies = () => {
   const [popularMovies, setPopularMovies] = useState([]);
