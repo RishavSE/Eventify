@@ -38,7 +38,12 @@ const MyTickets = () => {
   const downloadPDF = (ticket) => {
     const doc = new jsPDF();
     doc.setFontSize(16);
-    doc.text("Eventify Event-Ticket", 20, 20);
+
+ const pageWidth = doc.internal.pageSize.getWidth();
+ const text = "🎟️ Eventify Event-Ticket";
+ const textWidth = doc.getTextWidth(text);
+
+doc.text(text, (pageWidth - textWidth) / 2, 20);
 
     const tableData = [
       ["Event", ticket.eventTitle],
