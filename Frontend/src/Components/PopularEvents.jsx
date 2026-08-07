@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { useSearch } from "../Content/search";
 import pic from "/pic6.jpg";
-
+import { TbChartBarPopular } from "react-icons/tb";
 function PopularEvents() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -176,7 +176,10 @@ function PopularEvents() {
 
   return (
     <div className="popular-events">
-      <h2>Popular Events</h2>
+      <h2 className="events-title">
+        <TbChartBarPopular className="events-icon" />
+        <span>Popular Events</span>
+      </h2>
       <div className="event-grid">
         {events.map((event, index) => (
           <EventCard key={index} {...event} onBookNow={handleBookNow} />

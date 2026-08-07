@@ -35,3 +35,21 @@
 .movie-info {
   padding: 1rem;
 }
+
+.movies-title {
+  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+  margin: 0 auto 25px;
+  text-align: center;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.movies-icon {
+  font-size: 34px;
+  display: block;
+  flex-shrink: 0;
+}

@@ -6,7 +6,7 @@ import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Content/search";
 const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL;
-
+import { MdEvent } from "react-icons/md";
 const GoogleEvents = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -81,53 +81,66 @@ const GoogleEvents = () => {
   }, []);
 
   return (
-    <div className="google-events">
-      <h2>🎉 Events </h2>
-      {loading ? (
-        <p>Loading events...</p>
-      ) : events.length === 0 ? (
-        <p>No events found.</p>
-      ) : (
-        <div className="events-grid">
-          {events.map((event, idx) => (
-            <div key={idx} className="event-card">
-              <div className="event-image-wrapper">
-                <img
-                  src={
-                    event.image && event.image.includes("http")
-                      ? event.image
-                      : `https://source.unsplash.com/1600x900/?${encodeURIComponent(
-                          event.title,
-                        )},event`
-                  }
-                  alt={event.title}
-                  className="event-image"
-                  onError={(e) => {
-                    const fallbackImages = [
-                      "/pic1.jpg",
-                      "/pic2.jpg",
-                      "/pic3.jpg",
-                      "/pic4.jpg",
-                      "/pic5.jpg",
-                      "/pic6.jpg",
-                      "/pic7.jpg",
-                      "/pic8.jpg",
-                    ];
-                    const randomIndex = Math.floor(
-                      Math.random() * fallbackImages.length,
-                    );
-                    e.currentTarget.src = fallbackImages[randomIndex];
-                  }}
-                />
-              </div>
-              <div className="event-info">
-                <h3>{event.title}</h3>
-                <p>
-                  <strong>Date:</strong> {event.date?.start_date || "TBD"}
-                </p>
-                <p>
-                  <strong>Location:</strong> {event.address || "Online"}
-                </p>
+  <div className="google-events">
+
+    <h2 className="events-title">
+      <MdEvent className="events-icon" />
+      <span>Events</span>
+    </h2>
+
+    {loading ? (
+      <p>Loading events...</p>
+    ) : events.length === 0 ? (
+      <p>No events found.</p>
+    ) : (
+      <div className="events-grid">
+        {events.map((event, idx) => (
+          <div className="event-card" key={idx}>
+
+            <img
+              src={
+                event.image && event.image.includes("http")
+                  ? event.image
+                  : `https://source.unsplash.com/1600x900/?${encodeURIComponent(
+                      event.title
+                    )},event`
+              }
+              alt={event.title}
+              className="event-image"
+              onError={(e) => {
+                const fallbackImages = [
+                  "/pic1.jpg",
+                  "/pic2.jpg",
+                  "/pic3.jpg",
+                  "/pic4.jpg",
+                  "/pic5.jpg",
+                  "/pic6.jpg",
+                  "/pic7.jpg",
+                  "/pic8.jpg",
+                ];
+
+                const randomIndex = Math.floor(
+                  Math.random() * fallbackImages.length
+                );
+
+                e.currentTarget.src = fallbackImages[randomIndex];
+              }}
+            />
+
+            <div className="event-info">
+              <h3>{event.title}</h3>
+
+              <p>
+                <strong>Date:</strong>{" "}
+                {event.date?.start_date || "TBD"}
+              </p>
+
+              <p>
+                <strong>Location:</strong>{" "}
+                {event.address || "Online"}
+              </p>
+
+              <div className="event-footer">
                 <button
                   className="book-btn"
                   onClick={() => handleBookNow(event)}
@@ -136,18 +149,21 @@ const GoogleEvents = () => {
                 </button>
               </div>
             </div>
-          ))}
-        </div>
-      )}
 
-      {showModal && selectedEvent && (
-        <BookingModal
-          event={selectedEvent}
-          onClose={() => setShowModal(false)}
-        />
-      )}
-    </div>
-  );
+          </div>
+        ))}
+      </div>
+    )}
+
+    {showModal && selectedEvent && (
+      <BookingModal
+        event={selectedEvent}
+        onClose={() => setShowModal(false)}
+      />
+    )}
+
+  </div>
+);
 };
 
 export default GoogleEvents;

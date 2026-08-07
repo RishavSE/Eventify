@@ -5,7 +5,7 @@ import BookingModal from "./BookingModal";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Content/search";
-
+import { MdLocalMovies } from "react-icons/md";
 const TMDBMovies = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -164,7 +164,10 @@ const TMDBMovies = () => {
 
   return (
     <div className="google-events">
-      <h2>🎬 Popular Movies</h2>
+      <h2 className="movies-title">
+        <MdLocalMovies className="movies-icon" />
+        <span>Popular Movies</span>
+      </h2>
       <div className="events-grid">{popularMovies.map(renderMovieCard)}</div>
 
       <h2 style={{ marginTop: "3rem" }}>🌟 Top Rated Movies</h2>

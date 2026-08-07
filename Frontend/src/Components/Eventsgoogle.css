@@ -100,3 +100,58 @@ h2 {
   background: linear-gradient(to right, #5b3fc2, #8f6ef0);
   transform: scale(1.03);
 }
+.google-events {
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #f3f4f8, #e7e8f0);
+  color: #111;
+}
+
+.google-events .movies-title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  margin: 0 0 2rem 0;
+  padding: 0;
+
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.google-events .movies-icon {
+  display: block;
+  font-size: 34px;
+  flex-shrink: 0;
+}
+.events-title {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+
+  margin: 0 0 2rem 0 !important;
+  padding: 0 !important;
+
+  font-size: 2rem !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+
+.events-icon {
+  display: inline-block !important;
+  width: 34px;
+  height: 34px;
+  font-size: 34px;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transform: translateY(2px);
+}

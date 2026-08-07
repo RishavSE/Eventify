@@ -143,6 +143,28 @@ body {
   padding: 3rem 2rem;
   text-align: center;
 }
+.events-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.events-title {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centers the whole heading */
+  gap: 12px;
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 25px;
+  text-align: center;
+}
+
+.events-icon {
+  font-size: 34px;
+  flex-shrink: 0;
+}
 .event-grid {
   display: flex;
   justify-content: center;
