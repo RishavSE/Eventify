@@ -4,7 +4,7 @@ import autoTable from "jspdf-autotable";
 import "./Mytickets.css";
 import { auth, db } from "../Firebase";
 import { ref, onValue } from "firebase/database";
-
+import { BsTicketPerforated } from "react-icons/bs";
 const MyTickets = () => {
   const [tickets, setTickets] = useState([]);
 
@@ -39,11 +39,11 @@ const MyTickets = () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
 
- const pageWidth = doc.internal.pageSize.getWidth();
- const text = "Eventify Event-Ticket";
- const textWidth = doc.getTextWidth(text);
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const text = "Eventify Event-Ticket";
+    const textWidth = doc.getTextWidth(text);
 
-doc.text(text, (pageWidth - textWidth) / 2, 20);
+    doc.text(text, (pageWidth - textWidth) / 2, 20);
 
     const tableData = [
       ["Event", ticket.eventTitle],
@@ -69,7 +69,10 @@ doc.text(text, (pageWidth - textWidth) / 2, 20);
 
   return (
     <div className="my-tickets-page">
-      <h2>🎫 My Booked Tickets</h2>
+      <div className="my-tickets-header">
+        <BsTicketPerforated className="ticket-icon" />
+        <h2>My Booked Tickets</h2>
+      </div>
 
       {tickets.length === 0 ? (
         <p>No tickets booked yet.</p>
@@ -78,14 +81,30 @@ doc.text(text, (pageWidth - textWidth) / 2, 20);
           {tickets.map((ticket) => (
             <div className="ticket-card" key={ticket.id}>
               <h3>{ticket.eventTitle}</h3>
-              <p><strong>Name:</strong> {ticket.name}</p>
-              <p><strong>Email:</strong> {ticket.email}</p>
-              <p><strong>Seat:</strong> {ticket.seatType} ({ticket.seatPreference})</p>
-              <p><strong>Adults:</strong> {ticket.adults} | <strong>Children:</strong> {ticket.children}</p>
-              <p className="price"><strong>Total Paid:</strong> ₹{ticket.total}</p>
-              <p className="timestamp"><strong>Booked On:</strong> {ticket.date}</p>
+              <p>
+                <strong>Name:</strong> {ticket.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {ticket.email}
+              </p>
+              <p>
+                <strong>Seat:</strong> {ticket.seatType} (
+                {ticket.seatPreference})
+              </p>
+              <p>
+                <strong>Adults:</strong> {ticket.adults} |{" "}
+                <strong>Children:</strong> {ticket.children}
+              </p>
+              <p className="price">
+                <strong>Total Paid:</strong> ₹{ticket.total}
+              </p>
+              <p className="timestamp">
+                <strong>Booked On:</strong> {ticket.date}
+              </p>
 
-              <button className="pdf-btn" onClick={() => downloadPDF(ticket)}>⬇️ Download PDF</button>
+              <button className="pdf-btn" onClick={() => downloadPDF(ticket)}>
+                ⬇️ Download PDF
+              </button>
             </div>
           ))}
         </div>

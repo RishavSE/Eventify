@@ -69,3 +69,19 @@
 .pdf-btn:hover {
   background-color: #e91e63;
 }
+
+.my-tickets-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.ticket-icon {
+  font-size: 32px;
+}
+
+.my-tickets-header h2 {
+  margin: 0;
+}

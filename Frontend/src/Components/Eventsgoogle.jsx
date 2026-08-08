@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Content/search";
 const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL;
 import { MdEvent } from "react-icons/md";
+import { toast } from "react-hot-toast";
 const GoogleEvents = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,23 +51,22 @@ const GoogleEvents = () => {
     fetchEvents();
   }, []);
 
-  const handleBookNow = (eventData) => {
-    const user = auth.currentUser;
+ const handleBookNow = (eventData) => {
+  const user = auth.currentUser;
 
-    if (!user) {
-      const confirmRedirect = window.confirm(
-        "You need to sign in to book this event. Do you want to sign in now?",
-      );
-      if (confirmRedirect) {
-        navigate("/signin");
-      }
+  if (!user) {
+    toast.error("Please sign in to book this event.");
 
-      return;
-    }
+    setTimeout(() => {
+      navigate("/signin");
+    }, 1200);
 
-    setSelectedEvent(eventData);
-    setShowModal(true);
-  };
+    return;
+  }
+
+  setSelectedEvent(eventData);
+  setShowModal(true);
+};
 
   useEffect(() => {
     const user = auth.currentUser;

@@ -6,6 +6,8 @@ import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Content/search";
 import { MdLocalMovies } from "react-icons/md";
+import { toast } from "react-hot-toast";
+import { FaRankingStar } from "react-icons/fa6";
 const TMDBMovies = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -13,7 +15,6 @@ const TMDBMovies = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { registerSearchData } = useSearch();
-
   const locations = [
     "PVR VR Punjab",
     "Delhi",
@@ -85,12 +86,12 @@ const TMDBMovies = () => {
     };
 
     if (!user) {
-      const confirmRedirect = window.confirm(
-        "You need to sign in to book this movie. Do you want to sign in now?",
-      );
-      if (confirmRedirect) {
+      toast.error("Please sign in to book this movie.");
+
+      setTimeout(() => {
         navigate("/signin");
-      }
+      }, 1200);
+
       return;
     }
 
@@ -170,7 +171,9 @@ const TMDBMovies = () => {
       </h2>
       <div className="events-grid">{popularMovies.map(renderMovieCard)}</div>
 
-      <h2 style={{ marginTop: "3rem" }}>🌟 Top Rated Movies</h2>
+      <h2 style={{ marginTop: "3rem" }}>
+        <MdLocalMovies /> Top Rated Movies
+      </h2>
       <div className="events-grid">{topRatedMovies.map(renderMovieCard)}</div>
 
       {showModal && selectedMovie && (

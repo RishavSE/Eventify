@@ -21,7 +21,7 @@ import Signup from "./Components/Signup";
 import { SearchProvider } from "./Content/search";
 import AdminPanel from "./Adminpannel1/Adminpannel";
 import RequireAdmin from "./Adminpannel1/Requireadmin";
-
+import { Toaster } from "react-hot-toast";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../src/Firebase";
 
@@ -189,6 +189,13 @@ function AppContent() {
 function App() {
   return (
     <Router>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 1200,
+        }}
+      />
+
       <SearchProvider>
         <AppContent />
       </SearchProvider>

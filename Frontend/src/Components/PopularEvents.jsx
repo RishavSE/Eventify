@@ -19,6 +19,7 @@ import { auth } from "../Firebase";
 import { useSearch } from "../Content/search";
 import pic from "/pic6.jpg";
 import { TbChartBarPopular } from "react-icons/tb";
+import { toast } from "react-hot-toast";
 function PopularEvents() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -145,22 +146,22 @@ function PopularEvents() {
     );
   }, []);
 
-  const handleBookNow = (eventData) => {
-    const user = auth.currentUser;
+const handleBookNow = (eventData) => {
+  const user = auth.currentUser;
 
-    if (!user) {
-      const confirmRedirect = window.confirm(
-        "You need to sign in to book this event. Do you want to sign in now?",
-      );
-      if (confirmRedirect) {
-        navigate("/signin");
-      }
-      return;
-    }
+  if (!user) {
+    toast.error("Please sign in to book this event.");
 
-    setSelectedEvent(eventData);
-    setShowModal(true);
-  };
+    setTimeout(() => {
+      navigate("/signin");
+    }, 1200);
+
+    return;
+  }
+
+  setSelectedEvent(eventData);
+  setShowModal(true);
+};
 
   useEffect(() => {
     const user = auth.currentUser;
