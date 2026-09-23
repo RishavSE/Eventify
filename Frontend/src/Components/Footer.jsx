@@ -37,7 +37,7 @@ export default function Footerr() {
           <h4>Use Eventify</h4>
           <ul>
             <li>
-              <Link to="#" onClick={scrollToTop}>Home</Link>
+              <Link to="/" onClick={scrollToTop}>Home</Link>
             </li>
             <li>
               <Link to="/events" onClick={scrollToTop}>Events</Link>
