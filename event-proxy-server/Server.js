@@ -23,7 +23,7 @@ app.get("/api/events", async (req, res) => {
 
       const eventsResponse = await axios.get("https://serpapi.com/search", {
         params: {
-          engine: "google_events",
+          engine: "google",
           q: `events in ${city}`,
           hl: "en",
           api_key: process.env.SERPAPI_KEY,
